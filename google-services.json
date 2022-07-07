@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "570273302282",
+    "project_id": "ubymed-eccee",
+    "storage_bucket": "ubymed-eccee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570273302282:android:1856fe71ada7bd33a39cf3",
+        "android_client_info": {
+          "package_name": "com.ubymed.ubymed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570273302282-8d5l2og7llrh3of98huhtkl5iaqg8kpv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKM0Y2jB6OWCkKncYniDb6xBNAd4gKtJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570273302282-8d5l2og7llrh3of98huhtkl5iaqg8kpv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

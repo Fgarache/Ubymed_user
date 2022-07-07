@@ -1,0 +1,61 @@
+{
+
+  "expo": {
+    "name": "Ubymed",
+    "slug": "Ubymed",
+    "version": "2.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon-ios.png",
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.ubymed.ubymed",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "fetch"
+        ],
+        "NSLocationWhenInUseUsageDescription": "Si tú lo permites, Ubymed utilizará la ubicación de tu dispositivo para mostrarte los establecimientos más cercanos y facilitar la llegada de nuestros médicos y paramédicos. Esta información no será compartida ni enlazada a tu identidad."
+      },
+      "config": {
+  	    "googleMapsApiKey": "AIzaSyAxs_JXZJRfnlnIYL_CnVNPjdKROoCyvgc"
+      }
+    },
+    "android": {
+      "versionCode": 3,
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "FOREGROUND_SERVICE"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.ubymed.ubymed",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAxs_JXZJRfnlnIYL_CnVNPjdKROoCyvgc"
+        }
+      }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "color": "#ffffff",
+          "mode": "production"
+        }
+      ]
+    ]
+  }
+
+
+
+
+}
