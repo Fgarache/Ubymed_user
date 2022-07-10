@@ -1,17 +1,11 @@
-
 import * as React from 'react';
-
 import { useState, useEffect} from 'react';
 import { Text, View, TextInput, TouchableOpacity, Image, Modal, Alert, ScrollView, Platform, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback  } from 'react-native';
-
 import styles from "../styles";
-
 import MapView from 'react-native-maps';
 import { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
-
 import { AuthContext } from '../components/context.js';
 
 export default LabsConfirmarCompra = ({ navigation, route }) => {

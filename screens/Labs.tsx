@@ -28,17 +28,12 @@ export default Labs = ({ navigation, route, screenProps }) => {
 
     const [loading, setLoading] = useState(true);
     const [msjVeneficiencia, setMsjVeneficiencia] = useState ("Registrar usuario de Laboratorios el Pilar para aplicar a descuentos de Beneficiencia Española.")
-    const [text, onChangeText] = React.useState("Buscar");
-    const [filteredData, setFilteredData] = useState([]);
+    const [text, onChangeText] = React.useState("");
 
 
     function mapItems(items){
         return items.map((value, i) => ({key: i.toString(), value}));
-        
     }
-
-
-
     const Validar = ()=>{
         if (varG.estado === "false"){
             navigation.navigate('LoginPilar', { })
@@ -123,15 +118,10 @@ export default Labs = ({ navigation, route, screenProps }) => {
                                         </TouchableOpacity>
                                     </View>
                                 </View>
-                            }
-                            
-        
-        
+                            }       
                         </React.Fragment>
                     );
                 })
-
-
       }
 
     const renderLaboratorios = () =>{
@@ -170,7 +160,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
                                             <Text style={styles.textoServicioNotaLabs}>{item["detalle"][0]["tiempo_estimado"]}</Text>
                                         </View>
                                         <View style={styles.labsSeccionImagenLabs}>
-                                            <View style={styles.servicioImgContainerLabsDet}>
+        9                                    <View style={styles.servicioImgContainerLabsDet}>
                                                 <Image source={{uri: UBYMED_WS_BASE + "img/" + item["detalle"][0]["img"]}} style={styles.servicioImgLabLabs} resizeMode="stretch" />
                                             </View>
                                         </View>
@@ -179,10 +169,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
                             </View>
                         </View>
                     }
-                    
-
-
-                </React.Fragment>
+             </React.Fragment>
             );
         });
     }
@@ -261,7 +248,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
     const searchFilterFunction = (text) => {
         if(text){  
            
-            const newData = laboratorios.filter(item => {
+            const newData = laboratoriosData.filter(item => {
                 const itemData = item.nombre ? item.nombre.toUpperCase() : ''.toUpperCase();
                 const textData = text.toUpperCase();
                 return itemData.indexOf(textData) > -1;
@@ -276,8 +263,6 @@ export default Labs = ({ navigation, route, screenProps }) => {
 const enviar =() => {
 searchFilterFunction(text)
 }
-
-
     useEffect(() => {
         verificarPrimerUso();
         _getLocationYLabs();
@@ -329,10 +314,7 @@ searchFilterFunction(text)
               </TouchableOpacity>
             </View>
           </View>
-        </Modal>
-
-
-        
+        </Modal>       
 
 <Modal
           animationType="slide"
@@ -388,15 +370,9 @@ searchFilterFunction(text)
                     >
                         <Image source={require('../assets/arrow-left.png')} style={styles.TituloSeccionFlechaBackImg} resizeMode="stretch" />
                     </TouchableOpacity>
-
                     { renderLaboratorios() }
-
-
                     <Text style={styles.labelPrincipalBodySpaced}></Text>
                     <Text style={styles.labelPrincipalBodySpaced}></Text>
-
-                    
-
                 </View>
             </ScrollView>
             {

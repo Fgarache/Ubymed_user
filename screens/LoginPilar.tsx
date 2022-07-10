@@ -4,18 +4,14 @@ import styles from "../styles";
 import * as varG from "../components/varG";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
 const LoginPilar = ({navigation, route}) => {
-var tokenUbymed;
+  var tokenUbymed;
   const [modalVisible, setModalVisible] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalText, setModalText] = useState('');
   const [Usuario,  setUsuario] = useState('');
   const [Password, setPassword] = useState('');
-
-
 
 //servicio de autenticación al API, apuntar al ambiente adecuado...
 const UserLoginFunction = () => {
@@ -35,13 +31,9 @@ const UserLoginFunction = () => {
     .then((responseJson) => {
         if(responseJson["token"]) {
             tokenUbymed = responseJson["token"]
-            validarToken()
-
-
-            
+            validarToken()          
         } else {
             setModalVisible(true)
-
         }
     }).catch((error) => {
         //escribir los errores serveros en la consola e informar al usuario
@@ -51,15 +43,10 @@ const UserLoginFunction = () => {
         setModalText("Hubo un error crítico, por favor, intentelo de nuevo más tarde.");
     });
   }
-
-
-
 const validarToken = () => {
     var myHeaders = new Headers();
 myHeaders.append("Authorization", "Bearer "+tokenUbymed);
-
 var raw = "";
-
 var requestOptions = {
   method: 'GET',
   headers: myHeaders,
@@ -74,10 +61,6 @@ fetch("http://apix.elpilar.gt:9000/socio/S-00027/status", requestOptions)
         varG.estado = "true";
         varG.DPI = result["dpi"];
         navigation.goBack();
-        
-
-
-
     }else if (result["estado"] === "B"){
         setShowModal(true);
         setModalTitle("¡Error!");
@@ -94,10 +77,6 @@ fetch("http://apix.elpilar.gt:9000/socio/S-00027/status", requestOptions)
 })
   .catch(error => console.log('error', error));
 }
-
-  
-
-
   return (
     
 <React.Fragment>
@@ -175,9 +154,6 @@ fetch("http://apix.elpilar.gt:9000/socio/S-00027/status", requestOptions)
         </View>
     </View>
     </React.Fragment>
-
   );
-
 };
-
 export default LoginPilar;
