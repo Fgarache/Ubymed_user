@@ -39,15 +39,29 @@ export default Registro = ({ navigation, route }) => {
 
     const registrar = () => {
         var fechaNac;
-    
-
-        if (DPI.length < 13){
+        var dpi;
+        var pas;
+        
+        const validarDpi =()=>{
+            if (DPI.length === 9 && isNaN(DPI)===true){
+                pas = true;
+            }else{
+                pas = false;
+            }
+            if (DPI.length === 13 && isNaN(DPI)===false){
+                dpi = true;
+            }else{
+                dpi = false;
+            }
+        }
+        validarDpi()
+        if ( dpi === pas){
             setShowModal(true);
             setModalTitle("¡Error!");
-            setModalText("DPI incorrecto.");
-            return null;
+            setModalText("DPI o Pasaporte incorrecto ");
+            return null;  
         }
-
+        
 
 
         if (!aceptartp) {
