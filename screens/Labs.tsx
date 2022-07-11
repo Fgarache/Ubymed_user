@@ -74,55 +74,6 @@ export default Labs = ({ navigation, route, screenProps }) => {
             </View>
         );
     }
-    
-      const barraDeBusqueda = () => {
-                console.log(JSON.stringify(laboratorios));
-
-                return data.map((item) => {
-                    return (
-                        <React.Fragment key={item["nombre"]}>
-                            <Text style={styles.labelPrincipalBodySpaced}>
-                                {item["nombre"]}
-                            </Text>
-                            {
-                                (item["detalle"].length > 1) ?
-                                        <Carousel
-                                        data={item["detalle"]}
-                                        renderItem={renderItem}
-                                        itemWidth={0.85 * windowWidth}
-                                        inActiveOpacity={1}
-                                        containerWidth={windowWidth}
-                                        inactiveSlideScale={1}
-                                    />
-                                : 
-                                <View style={styles.labsContainerIndividual}>
-                                    <View style={styles.servicioMainContainerLabs} key={item["detalle"][0]["laboratorio"]}>
-                                        <TouchableOpacity style={{height: "100%",}} onPress={() => navigation.navigate('LabsDetalle', { idDetalle: item["detalle"][0]["laboratorio"],  })}>
-                                            <View style={styles.LabsMainInnerContainer}>
-                                                <View style={styles.labsSeccionDescripcion}>
-                                                    <Text style={styles.textoServicioTituloLabs}>{item["detalle"][0]["nombre"] + " " + item["detalle"][0]["nombre_detalle"]}</Text>
-                                                    <Text style={styles.textoServicioDescripcionLabs}>
-                                                        <Text>{item["detalle"][0]["horario_str"]}</Text>
-                                                        <Text>
-                                                            {Array(84 - item["detalle"][0]["horario_str"].length).join(' ').substring(0, 84 - item["detalle"][0]["horario_str"].length)}
-                                                        </Text>
-                                                    </Text>
-                                                    <Text style={styles.textoServicioNotaLabs}>{item["detalle"][0]["tiempo_estimado"]}</Text>
-                                                </View>
-                                                <View style={styles.labsSeccionImagenLabs}>
-                                                    <View style={styles.servicioImgContainerLabsDet}>
-                                                        <Image source={{uri: UBYMED_WS_BASE + "img/" + item["detalle"][0]["img"]}} style={styles.servicioImgLabLabs} resizeMode="stretch" />
-                                                    </View>
-                                                </View>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            }       
-                        </React.Fragment>
-                    );
-                })
-      }
 
     const renderLaboratorios = () =>{
         var data = laboratorios;
@@ -160,7 +111,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
                                             <Text style={styles.textoServicioNotaLabs}>{item["detalle"][0]["tiempo_estimado"]}</Text>
                                         </View>
                                         <View style={styles.labsSeccionImagenLabs}>
-        9                                    <View style={styles.servicioImgContainerLabsDet}>
+                                            <View style={styles.servicioImgContainerLabsDet}>
                                                 <Image source={{uri: UBYMED_WS_BASE + "img/" + item["detalle"][0]["img"]}} style={styles.servicioImgLabLabs} resizeMode="stretch" />
                                             </View>
                                         </View>
@@ -218,13 +169,10 @@ export default Labs = ({ navigation, route, screenProps }) => {
                                 }else{
                                     setLaboratorios(responseJson["data"])
                                     setLaboratoriosData(responseJson["data"])
-
-                                    console.log("no esta el laboratorio de veneficienca")
                                 }
                             }
                             }else{
                                 setLaboratorios(responseJson["data"])
-                                console.log("no esda disponible laboratio el pilar")
                             }
                             position= position+1;
                         }    
@@ -246,8 +194,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
     }
 
     const searchFilterFunction = (text) => {
-        if(text){  
-           
+        if(text){            
             const newData = laboratoriosData.filter(item => {
                 const itemData = item.nombre ? item.nombre.toUpperCase() : ''.toUpperCase();
                 const textData = text.toUpperCase();
@@ -258,19 +205,18 @@ export default Labs = ({ navigation, route, screenProps }) => {
         } else {
             setLaboratorios(laboratoriosData);
         }
-
     }
-const enviar =() => {
-searchFilterFunction(text)
-}
+    const handleChange=e=>{
+        searchFilterFunction(text)
+    }
+
     useEffect(() => {
         verificarPrimerUso();
         _getLocationYLabs();
         if (varG.estado === "false"){
         }else{
             setMsjVeneficiencia("")
-        }
-        
+        }        
     }, []);
     
     const [showModal, setShowModal] = useState(false);
@@ -346,13 +292,9 @@ searchFilterFunction(text)
                         <Image source={require('../assets/home_laboratorios.png')} style={[styles.serviciosHeaderImg, styles.homeImgBgLab]} resizeMode="stretch" /> 
                     </View>
                     <Text style={styles.TituloSeccion}>Laboratorios</Text>
-                        <TouchableOpacity onPress={() =>  Validar()
- }  >
-                            <Text style = {styles.labCarboxText}>{msjVeneficiencia}</Text>
+                        <TouchableOpacity onPress={() =>  Validar()}>                       
+                        <Text style = {styles.labCarboxText}>{msjVeneficiencia}</Text>
                         </TouchableOpacity>
-                        <Button title="Buscar..."  onPress={() => enviar()}/>
-
-                        
                         <View style={styles.CardBox2}>
                             <View style={styles.formularioInputContainer2}>
                             <TextInput
@@ -360,7 +302,10 @@ searchFilterFunction(text)
                             placeholder="Buscar..."
                             placeholderTextColor="#BDBDBD"
                             autoCapitalize='none'
-                            onChangeText={onChangeText} value={text}
+                            onChangeText={onChangeText} 
+                            onChange={handleChange}
+                            value={text}
+                            
                             />
                             </View>
                         </View>

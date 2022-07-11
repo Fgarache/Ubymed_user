@@ -16,7 +16,7 @@ export default Registro = ({ navigation, route }) => {
 
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
-    const [sexo, setSexo] = useState("1");
+    const [sexo, setSexo] = useState(1 ? "M" : "F");
     const [fechaNacimiento, setFechaNacimiento] = useState('');
     const [DPI, setDPI] = useState('');
 
@@ -223,13 +223,14 @@ export default Registro = ({ navigation, route }) => {
                         <View style={styles.FormularioRow}>
                             <Text style={styles.FormTextLabel}>Sexo</Text>
                             <View style={styles.FormTextInputSexo}>
-                                <Picker
+                            <Picker
                                     style={styles.FormTextInputSexoPicker}
                                     itemStyle={styles.FormTextInputSexoItem}
                                     selectedValue={sexo}
                                     onValueChange={(itemValue, itemIndex) => setSexo(itemValue) }>
-                                    <Picker.Item label='M' value='M' />
                                     <Picker.Item label='F' value='F' />
+                                    <Picker.Item label='M' value='M' />
+                                    
                                 </Picker>
                             </View>
                         </View>
