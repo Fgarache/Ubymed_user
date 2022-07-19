@@ -1,8 +1,7 @@
-
 import * as React from 'react';
 
 import {Component, useState, useEffect} from 'react';
-import { Text, View, TouchableOpacity, Image, Button, Alert, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, Button, Alert, ScrollView, TextInput } from 'react-native';
 
 import styles from "../styles";
 
@@ -19,6 +18,8 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
     const [laboratorios, setLaboratorios] = useState([]);
     const {idDetalle} = route.params;
     const [catNombre, setCatNombre] = useState("");
+    const [laboratoriosData, setLaboratoriosData] = useState([]);
+    const [text, onChangeText] = React.useState("");
 
     const [checked, setChecked] = React.useState({});
 
@@ -44,7 +45,7 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
     const renderLaboratorios = () =>{
         var data = laboratorios;
         //Alert.alert(JSON.stringify(data));
-        return data.map((item) => {
+        return laboratorios.map((item) => {
             return (
                 <React.Fragment key={item["lcc_nombre"]}>
                     <Text style={styles.labelPrincipalBodySpaced}>
@@ -84,7 +85,22 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
         });
     }
 
-
+    const searchFilterFunction = (text) => {
+        if(text){            
+            const newData = laboratoriosData.filter(item => {
+                const itemData = item.lcc_nombre ? item.lcc_nombre.toUpperCase() : ''.toUpperCase();
+                const textData = text.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+            })
+            //alert(newData)
+            setLaboratorios(newData);
+        } else {
+            setLaboratorios(laboratoriosData);
+        }
+    }
+    const handleChange=e=>{
+        searchFilterFunction(text)
+    }
     useEffect(() => {
         fetch(global.UBYMED_WS_BASE + 'api/usuario', {
             method: 'POST',
@@ -104,6 +120,8 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
                 Alert.alert(responseJson["data"]);
             } else {
                 setLaboratorios(responseJson["data"]);
+                setLaboratoriosData(responseJson["data"])
+
                 try {
                     setCatNombre(responseJson["data"][0]["data"][0].nombre + " " + responseJson["data"][0]["data"][0].nombre_detalle) 
                 } catch (error) {
@@ -131,6 +149,19 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
                     >
                         <Image source={require('../assets/arrow-left.png')} style={styles.TituloSeccionFlechaBackImg} resizeMode="stretch" />
                     </TouchableOpacity>
+                    <View style={styles.CardBox2}>
+                            <View style={styles.formularioInputContainer2}>
+                            <TextInput
+                            style={styles.formularioTextInput}
+                            placeholder="Buscar..."
+                            placeholderTextColor="#BDBDBD"
+                            autoCapitalize='none'
+                            onChangeText={onChangeText} 
+                            onChange={handleChange}
+                            value={text}                          
+                            />
+                            </View>
+                        </View>
 
                     { renderLaboratorios() }
 

@@ -25,10 +25,11 @@ export default Labs = ({ navigation, route, screenProps }) => {
     //request tipo POST hacia el API RestFul, request y response en formato JSON
     const [laboratorios, setLaboratorios] = useState([]);
     const [laboratoriosData, setLaboratoriosData] = useState([]);
+    const [text, onChangeText] = React.useState("");
 
     const [loading, setLoading] = useState(true);
-    const [msjVeneficiencia, setMsjVeneficiencia] = useState ("Registrar usuario de Laboratorios el Pilar para aplicar a descuentos de Beneficiencia Española.")
-    const [text, onChangeText] = React.useState("");
+    const [msjVeneficiencia, setMsjVeneficiencia] = useState ("Laboratorio el Pilar de Beneficiencia Española.")
+    
 
 
     function mapItems(items){
@@ -292,9 +293,13 @@ export default Labs = ({ navigation, route, screenProps }) => {
                         <Image source={require('../assets/home_laboratorios.png')} style={[styles.serviciosHeaderImg, styles.homeImgBgLab]} resizeMode="stretch" /> 
                     </View>
                     <Text style={styles.TituloSeccion}>Laboratorios</Text>
-                        <TouchableOpacity onPress={() =>  Validar()}>                       
-                        <Text style = {styles.labCarboxText}>{msjVeneficiencia}</Text>
+
+
+                        <TouchableOpacity onPress={() =>  Validar()}>
+                            <Text style = {styles.labCarboxText}>{msjVeneficiencia}</Text>
                         </TouchableOpacity>
+
+
                         <View style={styles.CardBox2}>
                             <View style={styles.formularioInputContainer2}>
                             <TextInput
@@ -304,8 +309,7 @@ export default Labs = ({ navigation, route, screenProps }) => {
                             autoCapitalize='none'
                             onChangeText={onChangeText} 
                             onChange={handleChange}
-                            value={text}
-                            
+                            value={text}                          
                             />
                             </View>
                         </View>

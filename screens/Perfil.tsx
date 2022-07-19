@@ -277,7 +277,7 @@ export default Perfil = ({ navigation, route }) => {
                         </View>
                     </View>
 
-                    <View style={styles.formularioInputContainer}>
+                    <View style={styles.formularioInputContainerLineSup}>
                         <View style={styles.FormularioRow}>
                             <Text style={styles.FormTextLabel}>DPI - Pasaporte</Text>
                             <TextInput
@@ -342,7 +342,7 @@ export default Perfil = ({ navigation, route }) => {
                 </View>
 
                 <Text style={styles.labelPrincipalBodySpaced}>
-                    Laboratorio El Pilar
+                    LABORATORIO EL PILAR
                 </Text>
                 <View style={styles.formularioContainer}>
                     <View style={styles.formularioInputContainer}>

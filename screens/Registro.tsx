@@ -121,6 +121,7 @@ export default Registro = ({ navigation, route }) => {
                     telefonos: telefono,
                     email: email,
                     passwd: passwd,
+                    DPI: DPI,
                 })
             }).then((response) => response.json())
             .then((responseJson) => {
@@ -266,7 +267,7 @@ export default Registro = ({ navigation, route }) => {
                             <Text style={styles.FormTextLabel}>DPI</Text>
                             <TextInput 
                                 style={styles.FormTextInput}
-                                placeholder="DPI"
+                                placeholder="DPI-Pasaporte"
                                 placeholderTextColor="#BDBDBD"
                                 onChangeText={(DPI) => setDPI(DPI)}
 

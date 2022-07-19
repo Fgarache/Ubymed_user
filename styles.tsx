@@ -1412,12 +1412,14 @@ export default StyleSheet.create({
         alignItems: 'center',
         alignContent: 'center',
         backgroundColor: "#f68b12",
+        
 
       },
 
       labCarboxText:{
         backgroundColor: "#f68b12",
         color: '#F2F2F2',
+        width: windowWidth,
         textAlign: 'center'
         
 
@@ -1441,7 +1443,7 @@ export default StyleSheet.create({
         marginStart: 0
     },
     CardBox2: {
-        marginTop: 5,
+        marginTop: 20,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -1455,4 +1457,9 @@ export default StyleSheet.create({
         alignSelf: "center",
         backgroundColor: "#FFFFFF",
     },
+    veneficiencia2:{
+        textAlign: 'center', 
+
+
+      },
 });
