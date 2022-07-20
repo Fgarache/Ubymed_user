@@ -105,8 +105,13 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
     }
 
     const handleChange=e=>{
-        searchFilterFunction(text)
+        if (text.length>=2){
+            searchFilterFunction(text)
+        }else{
+            setLaboratorios(laboratoriosData);
+        }
     }
+
 
     useEffect(() => {
         fetch(global.UBYMED_WS_BASE + 'api/usuario', {
