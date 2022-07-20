@@ -20,11 +20,8 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
     const [catNombre, setCatNombre] = useState("");
     const [laboratoriosData, setLaboratoriosData] = useState([]);
     const [text, onChangeText] = React.useState("");
-
     const [checked, setChecked] = React.useState({});
-
     const loginContext = React.useContext(AuthContext);
-
     const verificarSolicitarServicioLabs = () => {
         if (loginContext.isLogged !== true){
             return navigation.navigate('Login');
@@ -85,22 +82,32 @@ export default LabsDetalle = ({ navigation, route, screenProps }) => {
         });
     }
 
+
     const searchFilterFunction = (text) => {
-        if(text){            
-            const newData = laboratoriosData.filter(item => {
-                const itemData = item.lcc_nombre ? item.lcc_nombre.toUpperCase() : ''.toUpperCase();
-                const textData = text.toUpperCase();
-                return itemData.indexOf(textData) > -1;
-            })
-            //alert(newData)
-            setLaboratorios(newData);
-        } else {
+        if(text){
+            var filtered = laboratoriosData.filter(
+                el => el.data.filter(y => y.lc_nombre.toLowerCase()
+                .includes( text.toLowerCase() ) ).length > 0)
+
+            var second = filtered.map( x => {
+                var result;
+              result = {  lcc_nombre : x.lcc_nombre , data : x.data.filter( 
+                y => y.lc_nombre.toLowerCase().includes( text.toLowerCase() ))}
+                return result;
+            })            
+
+            setLaboratorios(second);
+            console.log(second);
+        }
+        else {
             setLaboratorios(laboratoriosData);
         }
     }
+
     const handleChange=e=>{
         searchFilterFunction(text)
     }
+
     useEffect(() => {
         fetch(global.UBYMED_WS_BASE + 'api/usuario', {
             method: 'POST',
